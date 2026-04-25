@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import AddProductDrawer from '../components/AddProductDrawer';
 import ProductTable from '../components/ProductTable';
-import axios from 'axios';
+import api from '../api';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -20,7 +20,9 @@ const Dashboard = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/api/products?isPublished=${activeTab === 'published'}`);
+      const response = await api.get('/products', {
+        params: { isPublished: activeTab === 'published' },
+      });
       setProducts(response.data);
     } catch (err) {
       console.error('Error fetching products:', err);
@@ -32,7 +34,7 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`);
+        await api.delete(`/products/${id}`);
         fetchProducts();
       } catch (err) {
         console.error('Error deleting product:', err);

@@ -20,8 +20,16 @@ if (process.env.MONGODB_URI && process.env.MONGODB_URI !== 'mongodb://localhost:
 }
 
 // Routes
-app.use('/api/products', require('./routes/productRoutes'));
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.get('/', (_req, res) => {
+  res.json({ message: 'Orufy API is running' });
 });
+
+app.use('/products', require('./routes/productRoutes'));
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+module.exports = app;

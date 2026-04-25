@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import './AddProductDrawer.css';
 
 const AddProductDrawer = ({ isOpen, onClose, onProductAdded, productToEdit }) => {
@@ -52,9 +52,9 @@ const AddProductDrawer = ({ isOpen, onClose, onProductAdded, productToEdit }) =>
       };
 
       if (productToEdit) {
-        await axios.put(`http://localhost:5000/api/products/${productToEdit._id}`, payload);
+        await api.put(`/products/${productToEdit._id}`, payload);
       } else {
-        await axios.post('http://localhost:5000/api/products', { ...payload, isPublished: true });
+        await api.post('/products', { ...payload, isPublished: true });
       }
       
       onProductAdded();

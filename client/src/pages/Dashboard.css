@@ -1,0 +1,171 @@
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-main {
+  flex: 1;
+  margin-left: 260px;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  height: 64px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background-color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tabs {
+  display: flex;
+  gap: 32px;
+  height: 100%;
+}
+
+.tab {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--light-text);
+  padding: 0 4px;
+  height: 100%;
+  position: relative;
+}
+
+.tab.active {
+  color: var(--primary-color);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.add-product-btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.add-product-btn:hover {
+  background-color: #050b52;
+  transform: translateY(-1px);
+}
+
+.user-profile {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--light-text);
+}
+
+.empty-icon {
+  font-size: 64px;
+  color: var(--primary-color);
+  margin-bottom: 24px;
+}
+
+.empty-state h2 {
+  font-size: 24px;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  max-width: 300px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .dashboard-main {
+    margin-left: 220px;
+  }
+
+  .dashboard-content {
+    padding: 24px;
+  }
+
+  .dashboard-header {
+    padding: 0 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .dashboard-main {
+    margin-left: 0;
+  }
+
+  .dashboard-header {
+    padding: 0 16px;
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 8px;
+  }
+
+  .tabs {
+    gap: 16px;
+  }
+
+  .tab {
+    font-size: 14px;
+  }
+
+  .add-product-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .dashboard-content {
+    padding: 16px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .header-right {
+    gap: 12px;
+  }
+
+  .empty-state h2 {
+    font-size: 18px;
+  }
+}

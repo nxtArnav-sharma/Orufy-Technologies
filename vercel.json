@@ -3,7 +3,7 @@
   "installCommand": "npm install --prefix client && npm install --prefix server",
   "buildCommand": "npm run build --prefix client",
   "outputDirectory": "client/dist",
-  "routes": [
+  "rewrites": [
     { "src": "/(?!api(?:/|$)).*", "dest": "/index.html" }
   ]
 }

@@ -25,6 +25,7 @@ app.get('/', (_req, res) => {
 });
 
 app.use('/products', require('./routes/productRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
 
 if (require.main === module) {
   app.listen(PORT, () => {

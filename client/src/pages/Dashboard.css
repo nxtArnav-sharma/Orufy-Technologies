@@ -5,74 +5,91 @@
 
 .dashboard-main {
   flex: 1;
-  margin-left: 260px;
-  background-color: var(--white);
+  background-color: #f8f9fc;
   display: flex;
   flex-direction: column;
 }
 
-.dashboard-header {
-  height: 64px;
-  border-bottom: 1px solid var(--border-color);
+.dashboard-header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
-  background-color: var(--white);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(254,245,245,1) 25%, rgba(255,255,240,1) 50%, rgba(245,245,255,1) 100%);
+  border-bottom: 1px solid #eee;
 }
 
-.tabs {
+.page-title {
   display: flex;
-  gap: 32px;
-  height: 100%;
-}
-
-.tab {
-  background: none;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--light-text);
-  padding: 0 4px;
-  height: 100%;
-  position: relative;
-}
-
-.tab.active {
-  color: var(--primary-color);
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 24px;
-}
-
-.add-product-btn {
-  background-color: var(--primary-color);
-  color: var(--white);
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.add-product-btn:hover {
-  background-color: #050b52;
-  transform: translateY(-1px);
+  gap: 1rem;
 }
 
 .user-profile {
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  background-color: #ddd;
+  border-radius: 50%;
   cursor: pointer;
+}
+
+.dashboard-tabs-container {
+  padding: 0 2rem;
+  background-color: #f8f9fc;
+  margin-top: 1rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 32px;
+  border-bottom: 2px solid #eee;
+}
+
+.tab {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8fa0b5;
+  padding: 12px 0;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.tab:hover {
+  color: #4a5c75;
+}
+
+.tab.active {
+  color: #1e2bc2;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #1e2bc2;
 }
 
 .dashboard-content {
   flex: 1;
-  padding: 40px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -84,18 +101,18 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: var(--light-text);
+  color: #8fa0b5;
 }
 
 .empty-icon {
   font-size: 64px;
-  color: var(--primary-color);
+  color: #1e2bc2;
   margin-bottom: 24px;
 }
 
 .empty-state h2 {
   font-size: 24px;
-  color: var(--text-color);
+  color: #2b3a4a;
   margin-bottom: 8px;
 }
 
@@ -107,65 +124,143 @@
   text-align: center;
   padding: 40px;
   font-size: 18px;
+  color: #8fa0b5;
 }
 
-/* ===================== RESPONSIVE ===================== */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .dashboard-main {
-    margin-left: 220px;
-  }
-
-  .dashboard-content {
-    padding: 24px;
-  }
-
-  .dashboard-header {
-    padding: 0 24px;
-  }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .dashboard-main {
-    margin-left: 0;
-  }
-
-  .dashboard-header {
-    padding: 0 16px;
-    flex-wrap: wrap;
-    height: auto;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    gap: 8px;
-  }
-
-  .tabs {
-    gap: 16px;
-  }
-
-  .tab {
-    font-size: 14px;
-  }
-
-  .add-product-btn {
-    padding: 8px 14px;
-    font-size: 13px;
-  }
-
-  .dashboard-content {
-    padding: 16px;
-  }
+/* Toast and Delete Modal Styles (Shared) */
+.custom-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  animation: slideUp 0.3s ease-out;
 }
 
-/* Small mobile */
-@media (max-width: 480px) {
-  .header-right {
-    gap: 12px;
-  }
+@keyframes slideUp {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
 
-  .empty-state h2 {
-    font-size: 18px;
-  }
+.toast-icon {
+  background-color: #38c92e;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+
+.toast-text {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 8px;
+  line-height: 1;
+}
+
+.toast-close:hover {
+  color: #333;
+}
+
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.delete-modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  animation: fadeInScale 0.2s ease-out;
+}
+
+.delete-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.delete-modal-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.delete-modal-body {
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.delete-modal-body p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.delete-modal-body strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.delete-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-confirm-btn {
+  background-color: #1e2bc2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 32px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete-confirm-btn:hover {
+  background-color: #16209e;
 }

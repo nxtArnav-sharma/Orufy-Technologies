@@ -100,6 +100,7 @@ const AddProductDrawer = ({ isOpen, onClose, onProductAdded, productToEdit }) =>
         stock: Number(formData.stock),
         mrp: Number(formData.mrp),
         sellingPrice: Number(formData.sellingPrice),
+        exchangeEligibility: formData.eligibility,
         images: images
       };
 

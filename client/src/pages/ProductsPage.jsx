@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import AddProductDrawer from '../components/AddProductDrawer';
-import ProductTable from '../components/ProductTable';
+import ProductCard from '../components/ProductCard';
 import api from '../api';
 import './ProductsPage.css';
 
@@ -11,6 +11,9 @@ const ProductsPage = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  const [toastMessage, setToastMessage] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -28,6 +31,17 @@ const ProductsPage = () => {
     }
   };
 
+  const showToastNotification = (msg) => {
+    setToastMessage(msg);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
+  const handleProductAdded = () => {
+    fetchProducts();
+    showToastNotification('Product added Successfully');
+  };
+
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
@@ -42,6 +56,15 @@ const ProductsPage = () => {
   const handleEdit = (product) => {
     setProductToEdit(product);
     setShowDrawer(true);
+  };
+
+  const handleTogglePublish = async (product) => {
+    try {
+      await api.put(`/products/${product._id}`, { ...product, isPublished: !product.isPublished });
+      fetchProducts();
+    } catch (err) {
+      console.error('Error toggling publish status:', err);
+    }
   };
 
   const handleCloseDrawer = () => {
@@ -88,13 +111,25 @@ const ProductsPage = () => {
               </button>
             </div>
           ) : (
-            <div className="products-list-wrapper">
-               <button className="add-product-btn-top" onClick={() => setShowDrawer(true)}>+ Add Product</button>
-               <ProductTable 
-                 products={filteredProducts} 
-                 onEdit={handleEdit} 
-                 onDelete={handleDelete} 
-               />
+            <div className="products-grid-wrapper">
+               <div className="products-grid-header">
+                 <h2 className="products-grid-title">Products</h2>
+                 <button className="add-product-link" onClick={() => setShowDrawer(true)}>
+                   + Add Products
+                 </button>
+               </div>
+               
+               <div className="products-grid">
+                 {filteredProducts.map(product => (
+                   <ProductCard 
+                     key={product._id} 
+                     product={product} 
+                     onEdit={handleEdit} 
+                     onDelete={handleDelete} 
+                     onTogglePublish={handleTogglePublish}
+                   />
+                 ))}
+               </div>
             </div>
           )}
         </section>
@@ -102,9 +137,17 @@ const ProductsPage = () => {
         <AddProductDrawer 
           isOpen={showDrawer} 
           onClose={handleCloseDrawer} 
-          onProductAdded={fetchProducts} 
+          onProductAdded={handleProductAdded} 
           productToEdit={productToEdit}
         />
+        
+        {showToast && (
+          <div className="custom-toast">
+            <span className="toast-icon">✅</span>
+            <span className="toast-text">{toastMessage}</span>
+            <button className="toast-close" onClick={() => setShowToast(false)}>&times;</button>
+          </div>
+        )}
       </main>
     </div>
   );

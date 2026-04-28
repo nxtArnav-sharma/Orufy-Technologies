@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
   stock: { type: Number, required: true },
   brand: { type: String },
   images: [{ type: String }], // Array of image URLs/paths
+  exchangeEligibility: { type: String, default: 'Yes' },
   isPublished: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
 });

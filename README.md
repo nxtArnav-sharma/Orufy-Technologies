@@ -566,6 +566,6 @@ if (isDBConnected()) {
 
 ## Author
 
-Built by: **[Your Name]**  
+Built by: **Arnav Sharma**  
 Assignment for: **Orufy Technologies Pvt. Ltd.**  
 Stack: React + Node.js + Express + MongoDB

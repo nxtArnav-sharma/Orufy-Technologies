@@ -10,6 +10,7 @@ const ProductsPage = () => {
   const [loading, setLoading] = useState(true);
   const [showDrawer, setShowDrawer] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
+  const [productToDelete, setProductToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   
   const [toastMessage, setToastMessage] = useState('');
@@ -42,14 +43,19 @@ const ProductsPage = () => {
     showToastNotification('Product added Successfully');
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this product?')) {
-      try {
-        await api.delete(`/products/${id}`);
-        fetchProducts();
-      } catch (err) {
-        console.error('Error deleting product:', err);
-      }
+  const handleDeleteClick = (product) => {
+    setProductToDelete(product);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!productToDelete) return;
+    try {
+      await api.delete(`/products/${productToDelete._id}`);
+      fetchProducts();
+      setProductToDelete(null);
+      showToastNotification('Product Deleted Successfully');
+    } catch (err) {
+      console.error('Error deleting product:', err);
     }
   };
 
@@ -125,7 +131,7 @@ const ProductsPage = () => {
                      key={product._id} 
                      product={product} 
                      onEdit={handleEdit} 
-                     onDelete={handleDelete} 
+                     onDelete={handleDeleteClick} 
                      onTogglePublish={handleTogglePublish}
                    />
                  ))}
@@ -141,6 +147,23 @@ const ProductsPage = () => {
           productToEdit={productToEdit}
         />
         
+        {productToDelete && (
+          <div className="delete-modal-overlay" onClick={() => setProductToDelete(null)}>
+            <div className="delete-modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="delete-modal-header">
+                <h2>Delete Product</h2>
+                <button className="close-btn" onClick={() => setProductToDelete(null)}>&times;</button>
+              </div>
+              <div className="delete-modal-body">
+                <p>Are you sure you really want to delete this Product <br />" <strong>{productToDelete.name}</strong> " ?</p>
+              </div>
+              <div className="delete-modal-footer">
+                <button className="delete-confirm-btn" onClick={handleConfirmDelete}>Delete</button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {showToast && (
           <div className="custom-toast">
             <span className="toast-icon">✅</span>

@@ -87,7 +87,7 @@ const ProductCard = ({ product, onEdit, onDelete, onTogglePublish }) => {
         <button className="action-btn-secondary" onClick={() => onEdit(product)}>
           Edit
         </button>
-        <button className="action-btn-icon delete-btn" onClick={() => onDelete(product._id)}>
+        <button className="action-btn-icon delete-btn" onClick={() => onDelete(product)}>
           🗑️
         </button>
       </div>

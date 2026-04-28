@@ -86,11 +86,19 @@ const ProductsPage = () => {
     <div className="products-page-layout">
       <Sidebar onSearch={setSearchTerm} />
       <main className="products-page-main">
-        <header className="products-page-header">
+        <header className="products-page-header-top">
           <div className="page-title">
             <span className="icon">🛍️</span> Products
           </div>
           <div className="header-right">
+            <div className="header-search">
+              <span className="search-icon">🔍</span>
+              <input 
+                type="text" 
+                placeholder="Search Services, Products" 
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
             <div className="user-profile">
               <span className="profile-icon">👤</span>
             </div>

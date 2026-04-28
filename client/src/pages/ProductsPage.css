@@ -6,6 +6,7 @@
 
 .products-page-main {
   flex: 1;
+  margin-left: 260px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -269,4 +270,17 @@
 
 .delete-confirm-btn:hover {
   background-color: #16209e;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .products-page-main {
+    margin-left: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-page-main {
+    margin-left: 0;
+  }
 }

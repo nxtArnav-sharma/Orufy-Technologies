@@ -1,0 +1,119 @@
+.products-page-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fc;
+}
+
+.products-page-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.products-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(254,245,245,1) 25%, rgba(255,255,240,1) 50%, rgba(245,245,255,1) 100%);
+  border-bottom: 1px solid #eee;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  background-color: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.products-page-content {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-state-custom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: transparent;
+  padding: 3rem;
+  margin: auto;
+  max-width: 600px;
+  width: 100%;
+}
+
+.empty-icon-custom {
+  margin-bottom: 1.5rem;
+}
+
+.empty-state-custom h2 {
+  font-size: 1.4rem;
+  color: #2b3a4a;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.empty-state-custom p {
+  color: #a0a5b1;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+.add-products-btn {
+  background-color: #1e2bc2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 2.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-products-btn:hover {
+  background-color: #16209e;
+}
+
+.products-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-product-btn-top {
+  align-self: flex-end;
+  background-color: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

@@ -60,8 +60,20 @@ const AddProductDrawer = ({ isOpen, onClose, onProductAdded, productToEdit }) =>
       onProductAdded();
       onClose();
     } catch (err) {
-      console.error('Error saving product:', err);
-      alert('Failed to save product');
+      console.error('Request failed:', err);
+      
+      // Axios error format
+      if (err.response) {
+        console.error('Backend error:', err.response.data);
+        const data = err.response.data;
+        let alertMsg = data.message || 'Failed to save product';
+        if (data.errors && data.errors.length > 0) {
+          alertMsg += '\n\n' + data.errors.join('\n');
+        }
+        alert(alertMsg);
+      } else {
+        alert(err.message || 'Failed to save product');
+      }
     }
   };
 

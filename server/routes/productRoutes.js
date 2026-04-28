@@ -50,13 +50,21 @@ router.post('/', validateProduct, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const { isPublished } = req.query;
-    const filterPublished = isPublished === 'true';
+    
+    let query = {};
+    if (isPublished !== undefined) {
+      query.isPublished = isPublished === 'true';
+    }
 
     if (isDBConnected()) {
-      const products = await Product.find({ isPublished: filterPublished }).sort({ createdAt: -1 });
+      const products = await Product.find(query).sort({ createdAt: -1 });
       res.json(products);
     } else {
-      const products = memoryProducts.filter(p => p.isPublished === filterPublished);
+      let products = memoryProducts;
+      if (isPublished !== undefined) {
+        const filterPublished = isPublished === 'true';
+        products = memoryProducts.filter(p => p.isPublished === filterPublished);
+      }
       res.json(products);
     }
   } catch (err) {

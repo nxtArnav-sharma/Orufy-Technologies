@@ -1,7 +1,5 @@
 # Productr — Full Stack Product Management Application
 
-> Built for the **Orufy Technologies Full Stack Developer Assignment**
-> Figma Design Reference: [Assignment_Dev](https://www.figma.com/design/jz1CdCk9aaW5itU99sC6uB/Assignment-_Dev?node-id=1-770&t=gAEZfGOdDHL1lavW-4)
 
 ---
 
@@ -567,5 +565,4 @@ if (isDBConnected()) {
 ## Author
 
 Built by: **Arnav Sharma**  
-Assignment for: **Orufy Technologies Pvt. Ltd.**  
 Stack: React + Node.js + Express + MongoDB
